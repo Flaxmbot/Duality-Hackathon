@@ -1,7 +1,7 @@
 <div align="center">
   <br />
     <a href="https://github.com/Flaxmbot/TestModel.git" target="_blank">
-      <img src="frontend/public/image.jpeg" alt="Project Banner">
+      <img src="TestModel-main/TestModel-main/frontend/public/image.jpeg" alt="Project Banner">
     </a>
   <br />
   <div>
