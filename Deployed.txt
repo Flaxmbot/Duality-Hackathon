@@ -1,0 +1,5 @@
+Deployed Links: https://code-offenders.vercel.app/
+For frontend : Vercel
+For Backend : Render
+
+NOTE: We are using Render free plan so, it will take around 10 minutes to process image and show on frontend. (Wait Patiently Please)
