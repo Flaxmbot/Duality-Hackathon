@@ -19,7 +19,7 @@ app.add_middleware(
 )
 
 # Load your YOLO model
-model = YOLO("model.pt")  # Make sure 'last.pt' is in the correct path
+model = YOLO("model.pt")  # Make sure 'model.pt' is in the correct path
 class_names = model.names  # Get class names from model
 
 # Define the target class IDs
