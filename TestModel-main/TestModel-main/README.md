@@ -1,7 +1,7 @@
 <div align="center">
   <br />
     <a href="https://github.com/Flaxmbot/TestModel.git" target="_blank">
-      <img src="frontend/public/image.jpeg" alt="Project Banner">
+      <img src="TestModel-main/TestModel-main/frontend/public/image.jpeg" alt="Project Banner">
     </a>
   <br />
   <div>
@@ -87,8 +87,8 @@ Make sure you have the following installed on your machine:
 **Cloning the Repository**
 
 ```bash
-git clone https://github.com/Flaxmbot/Duality-Hackathon.git
-cd Duality-Hackathon/TestModel-main/TestModel-main
+git clone https://github.com/Flaxmbot/TestModel.git
+cd TestModel
 ```
 
 **Installation**
@@ -96,8 +96,6 @@ cd Duality-Hackathon/TestModel-main/TestModel-main
 Install the project dependencies using npm:
 
 ```bash
-cd frontend
-
 npm install (for frontend)
 
 pip install requirements.txt (for backend model)
@@ -106,7 +104,10 @@ pip install requirements.txt (for backend model)
 **Running the Project**
 
 ```bash
-  python run_app.py (in terminal)
+npm run dev  (for frontend)
+
+uvicorn main:app --host 127.0.0.1 --port 8000 --reload  (for backend model)
+Or Just run -> python run_app.py (in terminal)
 ```
 
 Open [http://localhost:3000](http://localhost:3000/) in your browser to view the project.
