@@ -2,47 +2,53 @@ import os
 import subprocess
 import time
 import socket
+import platform
+import psutil
 
 # CONFIG
 BACKEND_PORT = 8000
-BACKEND_DIR = os.path.join(os.getcwd(), "")  # adjust if needed
+BACKEND_DIR = os.getcwd()  # adjust if needed
 FRONTEND_DIR = os.path.join(os.getcwd(), "frontend")  # adjust if needed
 
 def free_port(port):
-    try:
-        result = subprocess.check_output(f'netstat -ano | findstr :{port}', shell=True).decode()
-        lines = result.strip().split("\n")
-        for line in lines:
-            if "LISTENING" in line or "ESTABLISHED" in line:
-                pid = int(line.strip().split()[-1])
-                print(f"[INFO] Killing process on port {port} (PID {pid})")
-                os.system(f"taskkill /PID {pid} /F >nul 2>&1")
-    except Exception as e:
-        print(f"[INFO] Port {port} seems free or could not be freed: {e}")
+    system = platform.system().lower()
+
+    # Cross-platform way to find and kill processes on a port
+    for proc in psutil.process_iter(['pid', 'name']):
+        try:
+            conns = proc.connections()
+            for conn in conns:
+                if conn.status == 'LISTEN' and conn.laddr.port == port:
+                    pid = proc.pid
+                    print(f"[INFO] Killing process on port {port} (PID {pid})")
+                    proc.kill()
+        except Exception:
+            continue
 
 def start_backend():
     print("[INFO] Starting FastAPI backend server...")
     free_port(BACKEND_PORT)
     backend_process = subprocess.Popen(
         ["uvicorn", "main:app", "--reload", "--port", str(BACKEND_PORT)],
-        cwd=BACKEND_DIR,
-        creationflags=subprocess.CREATE_NEW_CONSOLE
+        cwd=BACKEND_DIR
     )
     return backend_process
 
 def start_frontend():
     print("[INFO] Starting Next.js frontend server...")
+    is_windows = platform.system().lower() == 'windows'
+    npm_command = "npm.cmd" if is_windows else "npm"
+    
     frontend_process = subprocess.Popen(
-        ["npm.cmd", "run", "dev"],
-        cwd=FRONTEND_DIR,
-        creationflags=subprocess.CREATE_NEW_CONSOLE
+        [npm_command, "run", "dev"],
+        cwd=FRONTEND_DIR
     )
     return frontend_process
 
 def main():
     print("== Duality Dev Launcher ==")
     backend = start_backend()
-    time.sleep(3)  # Give backend time to start
+    time.sleep(5)  # Give backend time to start
     frontend = start_frontend()
 
     print("\n[INFO] Servers running.\n")

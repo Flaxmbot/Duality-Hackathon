@@ -87,8 +87,8 @@ Make sure you have the following installed on your machine:
 **Cloning the Repository**
 
 ```bash
-git clone https://github.com/Flaxmbot/TestModel.git
-cd TestModel
+git clone https://github.com/Flaxmbot/Duality-Hackathon.git
+cd Duality-Hackathon/TestModel-main/TestModel-main
 ```
 
 **Installation**
@@ -96,6 +96,8 @@ cd TestModel
 Install the project dependencies using npm:
 
 ```bash
+cd frontend
+
 npm install (for frontend)
 
 pip install requirements.txt (for backend model)
@@ -104,10 +106,7 @@ pip install requirements.txt (for backend model)
 **Running the Project**
 
 ```bash
-npm run dev  (for frontend)
-
-uvicorn main:app --host 127.0.0.1 --port 8000 --reload  (for backend model)
-Or Just run -> python run_app.py (in terminal)
+  python run_app.py (in terminal)
 ```
 
 Open [http://localhost:3000](http://localhost:3000/) in your browser to view the project.
